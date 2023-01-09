@@ -32,6 +32,8 @@ RSpec.describe 'Dish Show' do
       expect(page).to have_content(@lettuce.name)
       expect(page).to have_content(@ranch.name)
       expect(page).to have_content(@crouton.name)
+      expect(page).to_not have_content(@tomato.name)
+      expect(page).to_not have_content(@cream.name)
     end
   end
 end
