@@ -4,6 +4,7 @@ RSpec.describe 'Dish Show' do
   describe 'As a user when I visit a dish show page' do
     before :each do
       @chef_1 = Chef.create!(name: 'Bill')
+      @chef_2 = Chef.create!(name: 'Steve')
       @dish_1 = @chef_1.dishes.create!(name: 'Salad', description: 'Leafy and green')
       @dish_2 = @chef_1.dishes.create!(name: 'Soup', description: 'Hot and delicious')
       @lettuce = Ingredient.create!(name: 'Lettuce', calories: 50)
@@ -41,6 +42,13 @@ RSpec.describe 'Dish Show' do
       visit dish_path(@dish_1.id)
 
       expect(page).to have_content('Total Calories: 400')
+    end
+
+    it 'Displays the name of the chef' do
+      visit dish_path(@dish_1.id)
+save_and_open_page 
+      expect(page).to have_content(@chef_1.name)
+      expect(page).to_not have_content(@chef_2.name)
     end
   end
 end
