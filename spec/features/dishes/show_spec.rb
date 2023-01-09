@@ -17,6 +17,7 @@ RSpec.describe 'Dish Show' do
       DishIngredient.create!(dish: @dish_2, ingredient: @tomato)
       DishIngredient.create!(dish: @dish_2, ingredient: @cream)
     end
+    
     it 'Displays the name and description of the dish' do
       visit dish_path(@dish_1.id)
 
@@ -34,6 +35,12 @@ RSpec.describe 'Dish Show' do
       expect(page).to have_content(@crouton.name)
       expect(page).to_not have_content(@tomato.name)
       expect(page).to_not have_content(@cream.name)
+    end
+
+    it 'Displays the total calories for the dish' do
+      visit dish_path(@dish_1.id)
+
+      expect(page).to have_content('Total Calories: 400')
     end
   end
 end
