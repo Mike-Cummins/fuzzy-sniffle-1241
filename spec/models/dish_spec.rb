@@ -6,10 +6,11 @@ RSpec.describe Dish, type: :model do
     it {should validate_presence_of :description}
   end
   describe "relationships" do
-    it {should belong_to :chef}
+    it {should have_many :chef_dishes}
+    it {should have_many(:dishes).through(:chef_dishes)}
     it {should have_many :dish_ingredients}
     it {should have_many(:ingredients).through(:dish_ingredients)}
-  end
+    end
 
   it 'Calculates the total amount of calories in the dish' do
     @chef_1 = Chef.create!(name: 'Bill')

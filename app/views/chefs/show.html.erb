@@ -1,0 +1,13 @@
+<h1><%= @chef.name %></h1>
+<div id="dishes">
+<h3>All Dishes: </h3>
+<% @chef.dishes.each do |dish| %>
+  <p><%= dish.name %></p>
+<% end %>
+</div>
+<%= form_with url: chef_dishes_path, method: :post, local: true do |form| %>
+  
+  <%= form.number_field :dish_id %>
+  <%= form.hidden_field :chef_id, value: "#{@chef.id}"%>
+  <%= form.submit 'Add Dish' %>
+<% end %>
